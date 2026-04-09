@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Piece TCG Pack Simulator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div class="brand">
+                <svg class="logo" viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="29" stroke="currentColor" stroke-width="2.5" />
+                    <path
+                        d="M20 42c8-16 16-24 24-24 2.5 0 4.5 2.3 4.5 5 0 3.7-2.5 5.8-5.3 7.3-4.1 2.4-8.9 4.7-12.2 11.7"
+                        stroke="currentColor" stroke-width="3.2" stroke-linecap="round" />
+                    <path d="M17 18h30M26 14c2 4 2 6 0 10M38 14c2 4 2 6 0 10" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" />
+                </svg>
+                <div>
+                    <h1>One Piece Pack Simulator</h1>
+                    <div
+                        style="font-size:12px;color:var(--color-text-faint);letter-spacing:.12em;text-transform:uppercase">
+                        Official-style pack opening · cinematic reveal · swipe to uncover</div>
+                </div>
+            </div>
+            <div class="status-pill"><span id="packCount">0</span> packs opened</div>
+        </header>
+        <main>
+            <section class="hero">
+                <div class="panel intro">
+                    <div class="eyebrow">Collector experience</div>
+                    <h2>Peel the foil. Flip the top card. Swipe to the next pull.</h2>
+                    <p>This version uses a 12-card stacked reveal so cards sit behind each other. Tap to flip the active
+                        card, then swipe left, right, up, or down to throw it away and expose the card underneath.</p>
+                </div>
+                <div class="panel controls">
+                    <div>
+                        <div class="eyebrow" style="margin-bottom:.6rem">Choose set</div>
+                        <div class="set-row">
+                            <select id="setSelect"></select>
+                            <span class="badge SECRET RARE">Chase the hits</span>
+                        </div>
+                    </div>
+                    <div class="btns"><button class="btn btn-primary" id="newPackBtn">Spawn sealed pack</button><button
+                            class="btn btn-secondary" id="autoOpenBtn">Auto open reveal</button><button
+                            class="btn btn-secondary" id="resetBtn">Reset session</button></div>
+                    <p style="color:var(--color-text-muted);font-size:var(--text-sm)">Choose a set, peel the wrapper,
+                        and swipe through a full 12-card booster pack with fast image loading and a realistic hit-chase
+                        feel inspired by modern One Piece openings.</p>
+                </div>
+            </section>
+            <section class="table-wrap">
+                <div class="opening-stage">
+                    <div class="spark-layer" id="sparkLayer"></div>
+                    <div class="flash" id="flash"></div>
+                    <div class="pack-area">
+                        <div class="pack-shadow"></div>
+                        <div class="pack-stack">
+                            <div class="foil-pack" id="foilPack" role="button" tabindex="0">
+                                <div class="pack-backdrop"></div>
+                                <div class="pack-art" id="packArt"></div>
+                                <div class="pack-label" id="packLabel"></div>
+                                <div class="foil-highlight"></div>
+                                <div class="foil-highlight-2"></div>
+                                <div class="tear-zone"></div>
+                                <div class="tear-strip" id="tearStrip">
+                                    <div class="pack-backdrop"></div>
+                                    <div class="pack-art" id="packArtStrip"></div>
+                                    <div class="foil-highlight"></div>
+                                    <div class="foil-highlight-2"></div>
+                                </div>
+                                <div class="tear-cut"></div>
+                            </div>
+                            <div class="stack-area" id="stackArea">
+                                <div class="stack-halo"></div>
+                                <div id="cardStack"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="drag-hint" id="dragHint">Drag down to tear open your booster pack</div>
+                    <div class="flip-hint hidden" id="flipHint">Swipe any direction to uncover the next card</div>
+                </div>
+            </section>
+            <section class="reveal-panel">
+                <div class="panel" style="padding:1.5rem">
+                    <div
+                        style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">
+                        <div>
+                            <div class="eyebrow" style="margin-bottom:.4rem">Your opening</div>
+                            <h3 style="font-family:var(--font-display);font-size:var(--text-xl)">Cards you pulled</h3>
+                        </div>
+                        <div id="bestPull"></div>
+                    </div>
+                    <div class="grid-cards" id="collectionGrid"></div>
+                </div>
+                <aside class="panel side-stats">
+                    <div class="stat">
+                        <label>Top hit</label>
+                        <strong id="bestRarity">—</strong>
+                    </div>
+
+                    <div class="stat">
+                        <label>Packs opened</label>
+                        <strong id="sessionPulls">0</strong>
+                    </div>
+
+                    <div class="stat">
+                        <label>Opening feed</label>
+                        <div class="log" id="pullLog"></div>
+                    </div>
+                </aside>
+            </section>
+        </main>
+        <footer class="footer">Fan-made One Piece TCG opening experience with cinematic visuals, official-style pack
+            art, and fast card reveals.</footer>
+    </div>
+</body>
+
+</html>
